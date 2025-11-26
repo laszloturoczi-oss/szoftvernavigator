@@ -90,11 +90,13 @@ const ContactPage = ({ onBack }) => (
       description="Lépjen kapcsolatba velünk! Telefonos ügyfélszolgálat és email elérhetőség ERP és MES szoftver tanácsadáshoz."
       path="/kapcsolat"
     />
-    <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12">
+    <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12 relative z-10">
       <button 
+        type="button"
         onClick={onBack} 
         aria-label="Vissza a főoldalra"
-        className="flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors font-medium"
+        // FIX: Megnövelt érintési terület (p-3) és negatív margó a vizuális igazításhoz
+        className="flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors font-medium p-3 -ml-3 rounded-lg hover:bg-blue-50 touch-manipulation"
       >
         <ArrowLeft className="w-5 h-5 mr-2" aria-hidden="true" /> Vissza a főoldalra
       </button>
@@ -109,7 +111,7 @@ const ContactPage = ({ onBack }) => (
           <div itemScope itemType="http://schema.org/ContactPoint">
             <h3 className="font-bold text-lg mb-1">Telefonos Ügyfélszolgálat</h3>
             <p className="text-gray-600 mb-2">Hívjon minket bizalommal hétköznap 9:00 és 17:00 között.</p>
-            <a href="tel:+36204209501" itemProp="telephone" className="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors">
+            <a href="tel:+36204209501" itemProp="telephone" className="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors inline-block py-2">
               +36 20 420 9501
             </a>
           </div>
@@ -136,11 +138,13 @@ const PrivacyPage = ({ onBack }) => (
       description="Ismerje meg, hogyan kezeljük személyes adatait a szoftvernavigátor szolgáltatás használata során. GDPR konform adatvédelem."
       path="/adatvedelem"
     />
-    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12">
+    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12 relative z-10">
       <button 
+        type="button"
         onClick={onBack} 
         aria-label="Vissza a főoldalra"
-        className="flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors font-medium"
+        // FIX: Megnövelt érintési terület (p-3)
+        className="flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors font-medium p-3 -ml-3 rounded-lg hover:bg-blue-50 touch-manipulation"
       >
         <ArrowLeft className="w-5 h-5 mr-2" aria-hidden="true" /> Vissza a főoldalra
       </button>
@@ -202,11 +206,13 @@ const TermsPage = ({ onBack }) => (
       description="Ismerje meg szolgáltatásunk Általános Szerződési Feltételeit (ÁSZF). Díjmentes szoftver-közvetítés feltételei."
       path="/aszf"
     />
-    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12">
+    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12 relative z-10">
       <button 
+        type="button"
         onClick={onBack} 
         aria-label="Vissza a főoldalra"
-        className="flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors font-medium"
+        // FIX: Megnövelt érintési terület (p-3)
+        className="flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors font-medium p-3 -ml-3 rounded-lg hover:bg-blue-50 touch-manipulation"
       >
         <ArrowLeft className="w-5 h-5 mr-2" aria-hidden="true" /> Vissza a főoldalra
       </button>
@@ -312,7 +318,7 @@ const LeadForm = () => {
 
   if (status === 'success') {
     return (
-      <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12 text-center animate-in fade-in zoom-in duration-300">
+      <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12 text-center animate-in fade-in zoom-in duration-300 relative z-10">
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-10 h-10 text-green-600" aria-hidden="true" />
         </div>
@@ -321,8 +327,9 @@ const LeadForm = () => {
           Munkatársunk hamarosan felveszi Önnel a kapcsolatot a megadott elérhetőségeken (általában 24 órán belül).
         </p>
         <button 
+          type="button"
           onClick={() => setStatus('idle')}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 focus:ring-4 focus:ring-orange-300"
+          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 focus:ring-4 focus:ring-orange-300 touch-manipulation"
         >
           Új üzenet küldése
         </button>
@@ -331,7 +338,7 @@ const LeadForm = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12">
+    <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12 relative z-10">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-blue-900">
         Kérjen ajánlatot kötelezettségek nélkül!
       </h2>
@@ -463,7 +470,7 @@ const LeadForm = () => {
         <button 
           type="submit" 
           disabled={status === 'loading'}
-          className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-bold py-4 rounded text-lg transition duration-300 shadow-md flex items-center justify-center gap-2 focus:ring-4 focus:ring-orange-300"
+          className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-bold py-4 rounded text-lg transition duration-300 shadow-md flex items-center justify-center gap-2 focus:ring-4 focus:ring-orange-300 touch-manipulation"
         >
           {status === 'loading' ? (
             <>
@@ -513,7 +520,8 @@ export default function App() {
 
   return (
     // Szemantikus main wrapper a fő tartalomnak
-    <main className="min-h-screen bg-white text-slate-800 font-sans">
+    // FIX: relative és z-index hozzáadása a fő tárolóhoz a biztonság kedvéért
+    <main className="min-h-screen bg-white text-slate-800 font-sans relative z-10">
       
       {/* DINAMIKUS SEO META ADATOK BETÖLTÉSE */}
       <SEOMetadata 
@@ -553,7 +561,7 @@ export default function App() {
             <a 
               href="#kapcsolat-urlap"
               onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition duration-300 shadow-xl shadow-orange-500/20 text-lg text-center"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition duration-300 shadow-xl shadow-orange-500/20 text-lg text-center touch-manipulation"
               aria-label="Ugrás az ingyenes konzultáció űrlaphoz"
             >
               Ingyenes Konzultáció Kérése
@@ -561,7 +569,8 @@ export default function App() {
             
             <a 
               href="tel:+36204209501"
-              className="flex items-center gap-2 text-white hover:text-orange-100 transition-colors cursor-pointer mt-4"
+              // FIX: p-2 padding hozzáadva a telefonszám linkhez mobilon
+              className="flex items-center gap-2 text-white hover:text-orange-100 transition-colors cursor-pointer mt-4 p-2 rounded-lg"
               style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 1)' }}
             >
               <Phone className="w-6 h-6" style={{ filter: 'drop-shadow(1px 1px 2px rgba(0,0,0,0.8))' }} aria-hidden="true" />
@@ -572,7 +581,7 @@ export default function App() {
       </header>
 
       {/* MIÉRT VÁLASSZON MINKET? */}
-      <section className="py-16 px-4 bg-blue-50" aria-label="Előnyeink">
+      <section className="py-16 px-4 bg-blue-50 relative z-10" aria-label="Előnyeink">
         <div className="max-w-7xl mx-auto text-center"> 
           <h2 className="text-3xl font-bold mb-12 text-slate-900">Miért válasszon minket?</h2>
           
@@ -622,7 +631,7 @@ export default function App() {
       </section>
 
       {/* FÓKUSZTERÜLETEK */}
-      <section className="py-16 px-4 bg-red-50" aria-label="Szolgáltatások">
+      <section className="py-16 px-4 bg-red-50 relative z-10" aria-label="Szolgáltatások">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-12 text-center text-slate-900">Fókuszterületek</h2>
           
@@ -647,8 +656,8 @@ export default function App() {
                 </div>
                 <h3 className="font-bold mb-2 text-xl">Testreszabott Megoldások</h3>
                 <p className="text-gray-600 text-sm mb-6">Teljesen az Ön üzleti folyamataira szabott szoftverek, amikor a dobozos megoldás nem elég.</p>
-                <div className="mt-auto w-full">
-                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                <div className="mt-auto w-full relative z-20">
+                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block touch-manipulation">
                     Érdekel
                   </a>
                 </div>
@@ -674,8 +683,8 @@ export default function App() {
                 </div>
                 <h3 className="font-bold mb-2 text-xl">Teljes körű integráció</h3>
                 <p className="text-gray-600 text-sm mb-6">Pénzügy, készletkezelés, beszerzés és HR folyamatok egyetlen átlátható rendszerben.</p>
-                <div className="mt-auto w-full">
-                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                <div className="mt-auto w-full relative z-20">
+                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block touch-manipulation">
                     Érdekel
                   </a>
                 </div>
@@ -701,8 +710,8 @@ export default function App() {
                 </div>
                 <h3 className="font-bold mb-2 text-xl">Termelésoptimalizálás</h3>
                 <p className="text-gray-600 text-sm mb-6">Valós idejű termeléskövetés, gépkihasználtság (OEE) mérés és minőségbiztosítás.</p>
-                <div className="mt-auto w-full">
-                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                <div className="mt-auto w-full relative z-20">
+                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block touch-manipulation">
                     Érdekel
                   </a>
                 </div>
@@ -728,8 +737,8 @@ export default function App() {
                 </div>
                 <h3 className="font-bold mb-2 text-xl">Forrásteremtés</h3>
                 <p className="text-gray-600 text-sm mb-6">Szakértő segítség pályázati források felkutatásában és a teljes dokumentáció összeállításában.</p>
-                <div className="mt-auto w-full">
-                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                <div className="mt-auto w-full relative z-20">
+                  <a href="#kapcsolat-urlap" onClick={(e) => { e.preventDefault(); handleScrollAndPageChange('kapcsolat-urlap', null); }} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block touch-manipulation">
                     Érdekel
                   </a>
                 </div>
@@ -741,7 +750,7 @@ export default function App() {
       </section>
 
            {/* HOGYAN DOLGOZUNK? */}
-      <section className="py-16 px-4 bg-white" aria-label="Munkafolyamat">
+      <section className="py-16 px-4 bg-white relative z-10" aria-label="Munkafolyamat">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-16 text-center text-slate-900">Hogyan dolgozunk?</h2>
           
@@ -781,7 +790,7 @@ export default function App() {
 
 
       {/* MENNYIBE KERÜL? */}
-      <section className="py-16 px-4 bg-slate-50 border-t border-slate-200" aria-label="Árazás">
+      <section className="py-16 px-4 bg-slate-50 border-t border-slate-200 relative z-10" aria-label="Árazás">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex justify-center mb-6">
             <div className="bg-green-100 p-4 rounded-full">
@@ -804,28 +813,34 @@ export default function App() {
       </section>
 
       {/* KAPCSOLATI ŰRLAP */}
-      <section id="kapcsolat-urlap" className="py-16 px-4 bg-blue-900 text-white" aria-label="Kapcsolatfelvétel">
+      <section id="kapcsolat-urlap" className="py-16 px-4 bg-blue-900 text-white relative z-10" aria-label="Kapcsolatfelvétel">
         <LeadForm />
       </section>
 
       {/* LÁBLÉC */}
-      <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800" role="contentinfo">
+      <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800 relative z-20" role="contentinfo">
         <nav className="flex justify-center gap-6 mb-4 relative z-[9999] pointer-events-auto" aria-label="Lábléc menü">
           <button
+            type="button"
             onClick={() => handleScrollAndPageChange(null, 'contact')} 
-            className="hover:text-white transition-colors cursor-pointer"
+            // FIX: Padding növelése mobilos kattintáshoz
+            className="hover:text-white transition-colors cursor-pointer p-3 rounded-lg touch-manipulation"
           >
             Kapcsolat
           </button>
           <button 
+            type="button"
             onClick={() => handleScrollAndPageChange(null, 'privacy')} 
-            className="hover:text-white transition-colors cursor-pointer"
+            // FIX: Padding növelése mobilos kattintáshoz
+            className="hover:text-white transition-colors cursor-pointer p-3 rounded-lg touch-manipulation"
           >
             Adatvédelem
           </button>
           <button 
+            type="button"
             onClick={() => handleScrollAndPageChange(null, 'terms')} 
-            className="hover:text-white transition-colors cursor-pointer"
+            // FIX: Padding növelése mobilos kattintáshoz
+            className="hover:text-white transition-colors cursor-pointer p-3 rounded-lg touch-manipulation"
           >
             ÁSZF
           </button>
