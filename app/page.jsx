@@ -592,7 +592,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* HOGYAN DOLGOZUNK? */}
+           {/* HOGYAN DOLGOZUNK? */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-16 text-center text-slate-900">Hogyan dolgozunk?</h2>
@@ -615,7 +615,8 @@ export default function App() {
             </div>
 
             <div className="mb-8 md:mb-0 bg-white p-4 w-full md:w-1/4">
-              <div className="w-16 h-16 mxauto bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 border-4 border-white shadow-md">3</div>
+              {/* ITT VOLT A HIBA: mxauto -> mx-auto */}
+              <div className="w-16 h-16 mx-auto bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 border-4 border-white shadow-md">3</div>
               <FileCheck className="w-8 h-8 mx-auto text-blue-600 mb-2" />
               <h4 className="font-bold text-lg">Legjobb Ajánlatok</h4>
               <p className="text-sm text-gray-500 mt-2">Bemutatjuk Önnek a megszűrt, legjobb ár-érték arányú opciókat.</p>
@@ -630,6 +631,7 @@ export default function App() {
           </div>
         </div>
       </section>
+
 
       {/* MENNYIBE KERÜL? */}
       <section className="py-16 px-4 bg-slate-50 border-t border-slate-200">
