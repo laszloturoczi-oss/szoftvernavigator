@@ -396,7 +396,7 @@ export default function App() {
           </p>
           
           <div className="flex flex-col items-center gap-4">
-            {/* JAVÍTOTT GOMB: ANCHOR TAG A NATÍV MOBIL GÖRGETÉSÉRT */}
+            {/* ANCHOR TAG A NATÍV MOBIL GÖRGETÉSÉRT */}
             <a 
               href="#kapcsolat-urlap"
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition duration-300 shadow-xl shadow-orange-500/20 text-lg text-center"
@@ -482,7 +482,7 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Testreszabott Megoldások</h3>
                 <p className="text-gray-600 text-sm mb-6">Teljesen az Ön üzleti folyamataira szabott szoftverek, amikor a dobozos megoldás nem elég.</p>
                 <div className="mt-auto w-full">
-                  {/* JAVÍTOTT GOMB */}
+                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -505,7 +505,7 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Teljes körű integráció</h3>
                 <p className="text-gray-600 text-sm mb-6">Pénzügy, készletkezelés, beszerzés és HR folyamatok egyetlen átlátható rendszerben.</p>
                 <div className="mt-auto w-full">
-                  {/* JAVÍTOTT GOMB */}
+                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -528,7 +528,7 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Termelésoptimalizálás</h3>
                 <p className="text-gray-600 text-sm mb-6">Valós idejű termeléskövetés, gépkihasználtság (OEE) mérés és minőségbiztosítás.</p>
                 <div className="mt-auto w-full">
-                  {/* JAVÍTOTT GOMB */}
+                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -551,7 +551,7 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Forrásteremtés</h3>
                 <p className="text-gray-600 text-sm mb-6">Szakértő segítség pályázati források felkutatásában és a teljes dokumentáció összeállításában.</p>
                 <div className="mt-auto w-full">
-                  {/* JAVÍTOTT GOMB */}
+                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -633,28 +633,25 @@ export default function App() {
       {/* LÁBLÉC */}
       <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
         <div className="flex justify-center gap-6 mb-4">
-          {/* JAVÍTOTT MENÜPONTOK: ANCHOR TAG A STABIL MŰKÖDÉSÉRT */}
-          <a
-            href="#" 
-            onClick={(e) => { e.preventDefault(); setActivePage('contact'); }} 
-            className="hover:text-white transition-colors"
+          {/* JAVÍTOTT MENÜPONTOK: BUTTON TAG-ek a stabil ONCLICK eseménykezelésért */}
+          <button
+            onClick={() => setActivePage('contact')} 
+            className="hover:text-white transition-colors cursor-pointer"
           >
             Kapcsolat
-          </a>
-          <a 
-            href="#" 
-            onClick={(e) => { e.preventDefault(); setActivePage('privacy'); }} 
-            className="hover:text-white transition-colors"
+          </button>
+          <button 
+            onClick={() => setActivePage('privacy')} 
+            className="hover:text-white transition-colors cursor-pointer"
           >
             Adatvédelem
-          </a>
-          <a 
-            href="#" 
-            onClick={(e) => { e.preventDefault(); setActivePage('terms'); }} 
-            className="hover:text-white transition-colors"
+          </button>
+          <button 
+            onClick={() => setActivePage('terms')} 
+            className="hover:text-white transition-colors cursor-pointer"
           >
             ÁSZF
-          </a>
+          </button>
         </div>
         <p>&copy; 2025 ERP & MES Solutions. Minden jog fenntartva.</p>
       </footer>
