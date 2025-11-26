@@ -1,5 +1,4 @@
 'use client';
-
 // FIX: Kikapcsolja a TypeScript szigorú típusellenőrzését, ami a Vercel build hibát okozta.
 // @ts-nocheck 
 
