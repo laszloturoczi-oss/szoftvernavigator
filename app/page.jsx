@@ -173,7 +173,7 @@ const LeadForm = () => {
     setStatus('loading');
 
     try {
-      // Megpróbáljuk elküldeni az űrlapot
+      // Megpróbáljuk elküldeni az űrlapot AJAX-szal
       const response = await fetch("https://formsubmit.co/ajax/laszlo.turoczi@gmail.com", {
         method: "POST",
         headers: { 
@@ -236,8 +236,25 @@ const LeadForm = () => {
         Kérjen ajánlatot kötelezettségek nélkül!
       </h2>
 
-      {/* A form tag-en van az onSubmit eseménykezelő, ami megakadályozza az oldalfrissítést */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      {/* A form tag-en van az onSubmit eseménykezelő, ami megakadályozza az oldalfrissítést.
+          + HTML fallback: action + method, ha a JS valamiért nem fut (mobilon is menjen el az űrlap) */}
+      <form
+        onSubmit={handleSubmit}
+        action="https://formsubmit.co/laszlo.turoczi@gmail.com"
+        method="POST"
+        className="space-y-6"
+      >
+        {/* Konfigurációs mezők – HTML fallback esetére (JS nélkül is működjön) */}
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input
+          type="hidden"
+          name="_autoresponse"
+          value="Köszönjük megkeresését! Rendszerünk sikeresen rögzítette adatait. Biztosítjuk, hogy információit bizalmasan kezeljük. Szakértő kollégánk hamarosan (általában 24 órán belül) felveszi Önnel a kapcsolatot a megadott elérhetőségeken, hogy egyeztessen a részletekről. Üdvözlettel: Az ERP & MES Solutions csapata"
+        />
+        {/* A _subject dinamikusan AJAX-ban továbbra is a névvel megy, 
+            fallback esetén a Formsubmit saját default tárgyát használja. */}
+
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-bold mb-2">Név*</label>
