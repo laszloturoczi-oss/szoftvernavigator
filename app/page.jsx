@@ -163,12 +163,13 @@ const LeadForm = () => {
   });
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
 
+  // Fontos: a mezők kezelése a form data állapotában történik
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Megakadályozza az alapértelmezett oldalfrissítést
     setStatus('loading');
 
     try {
@@ -235,6 +236,7 @@ const LeadForm = () => {
         Kérjen ajánlatot kötelezettségek nélkül!
       </h2>
 
+      {/* A form tag-en van az onSubmit eseménykezelő, ami megakadályozza az oldalfrissítést */}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div>
@@ -360,8 +362,17 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [activePage]);
 
-  // A GÖRGŐ FUNKCIÓT ELTÁVOLÍTOTTUK, A GOMBOK HELYETT ANCHOR TAG-et HASZNÁLUNK
-  // így a mobil natív böngészője kezeli a horgonyra ugrást (#kapcsolat-urlap)
+  // JAVÍTOTT FUNKCIÓ A STABIL GÖRGETÉSHEZ ÉS NAVIGÁCIÓHOZ
+  const handleScrollAndPageChange = (target, page) => {
+    if (target) {
+        // Natív, megbízható horgonyra ugrás (pl. #kapcsolat-urlap)
+        window.location.hash = target;
+    }
+    if (page) {
+        // Oldalváltás a React state-ben
+        setActivePage(page);
+    }
+  };
 
   const goHome = () => setActivePage('landing');
   
@@ -396,9 +407,10 @@ export default function App() {
           </p>
           
           <div className="flex flex-col items-center gap-4">
-            {/* ANCHOR TAG A NATÍV MOBIL GÖRGETÉSÉRT */}
+            {/* VISSZAHÍVÁS GOMB: Hívja a handleScrollAndPageChange funkciót */}
             <a 
               href="#kapcsolat-urlap"
+              onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)}
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition duration-300 shadow-xl shadow-orange-500/20 text-lg text-center"
             >
               Ingyenes Konzultáció Kérése
@@ -483,7 +495,7 @@ export default function App() {
                 <p className="text-gray-600 text-sm mb-6">Teljesen az Ön üzleti folyamataira szabott szoftverek, amikor a dobozos megoldás nem elég.</p>
                 <div className="mt-auto w-full">
                   {/* ANCHOR TAG */}
-                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                  <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
                 </div>
@@ -506,7 +518,7 @@ export default function App() {
                 <p className="text-gray-600 text-sm mb-6">Pénzügy, készletkezelés, beszerzés és HR folyamatok egyetlen átlátható rendszerben.</p>
                 <div className="mt-auto w-full">
                   {/* ANCHOR TAG */}
-                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                  <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
                 </div>
@@ -529,7 +541,7 @@ export default function App() {
                 <p className="text-gray-600 text-sm mb-6">Valós idejű termeléskövetés, gépkihasználtság (OEE) mérés és minőségbiztosítás.</p>
                 <div className="mt-auto w-full">
                   {/* ANCHOR TAG */}
-                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                  <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
                 </div>
@@ -552,7 +564,7 @@ export default function App() {
                 <p className="text-gray-600 text-sm mb-6">Szakértő segítség pályázati források felkutatásában és a teljes dokumentáció összeállításában.</p>
                 <div className="mt-auto w-full">
                   {/* ANCHOR TAG */}
-                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
+                  <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
                 </div>
@@ -633,21 +645,21 @@ export default function App() {
       {/* LÁBLÉC */}
       <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
         <div className="flex justify-center gap-6 mb-4">
-          {/* JAVÍTOTT MENÜPONTOK: BUTTON TAG-ek a stabil ONCLICK eseménykezelésért */}
+          {/* JAVÍTOTT MENÜPONTOK: BUTTON TAG-ek használata a stabil ONCLICK eseménykezelésért */}
           <button
-            onClick={() => setActivePage('contact')} 
+            onClick={() => handleScrollAndPageChange(null, 'contact')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Kapcsolat
           </button>
           <button 
-            onClick={() => setActivePage('privacy')} 
+            onClick={() => handleScrollAndPageChange(null, 'privacy')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Adatvédelem
           </button>
           <button 
-            onClick={() => setActivePage('terms')} 
+            onClick={() => handleScrollAndPageChange(null, 'terms')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             ÁSZF
