@@ -148,7 +148,8 @@ const LeadForm = () => {
   });
   const [status, setStatus] = useState('idle');
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
