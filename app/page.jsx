@@ -172,6 +172,7 @@ const LeadForm = () => {
     setStatus('loading');
 
     try {
+      // Megpróbáljuk elküldeni az űrlapot
       const response = await fetch("https://formsubmit.co/ajax/laszlo.turoczi@gmail.com", {
         method: "POST",
         headers: { 
@@ -357,16 +358,29 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [activePage]);
 
+  // JAVÍTOTT GÖRGETÉS FUNKCIÓ
   const scrollToForm = () => {
+    // Ha nem a landing page-en vagyunk, először navigáljunk oda
     if (activePage !== 'landing') {
       setActivePage('landing');
+      // Kis késleltetés, hogy a DOM felépüljön a görgetés előtt
       setTimeout(() => {
         const formSection = document.getElementById('kapcsolat-urlap');
-        if (formSection) formSection.scrollIntoView({ behavior: 'smooth' });
+        if (formSection) {
+            formSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // ROBOSZTUS TARTALÉK MEGOLDÁS MOBILRA
+            window.location.hash = 'kapcsolat-urlap';
+        }
       }, 100);
     } else {
       const formSection = document.getElementById('kapcsolat-urlap');
-      if (formSection) formSection.scrollIntoView({ behavior: 'smooth' });
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+         // ROBOSZTUS TARTALÉK MEGOLDÁS MOBILRA
+        window.location.hash = 'kapcsolat-urlap';
+      }
     }
   };
 
