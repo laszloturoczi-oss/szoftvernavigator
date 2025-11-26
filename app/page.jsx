@@ -130,7 +130,6 @@ const TermsPage = ({ onBack }) => (
           <p>
             A szolgáltatás a Felhasználó (ajánlatkérő vállalkozás) számára <strong>teljesen ingyenes</strong>. A Szolgáltató jutalékát a sikeres üzletkötést követően a partner szolgáltatók fizetik. Ez a konstrukció nem eredményez áremelkedést a Felhasználó számára; a Felhasználó a piaci áron, vagy annál kedvezőbben juthat a szolgáltatáshoz.
           </p>
-          
         </section>
 
         <section>
@@ -163,17 +162,15 @@ const LeadForm = () => {
   });
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
 
-  // Fontos: a mezők kezelése a form data állapotában történik
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Megakadályozza az alapértelmezett oldalfrissítést
+    e.preventDefault();
     setStatus('loading');
 
     try {
-      // Megpróbáljuk elküldeni az űrlapot AJAX-szal
       const response = await fetch("https://formsubmit.co/ajax/laszlo.turoczi@gmail.com", {
         method: "POST",
         headers: { 
@@ -181,25 +178,25 @@ const LeadForm = () => {
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            // Adatok
             name: formData.name,
             email: formData.email,
             company: formData.company,
             phone: formData.phone,
             interest: formData.interest,
             message: formData.message,
-            
-            // Konfigurációs mezők
+
             _subject: `Új érdeklődő: ${formData.name}`,
             _template: 'table',
             _captcha: 'false', 
-            _autoresponse: "Köszönjük megkeresését! Rendszerünk sikeresen rögzítette adatait. Biztosítjuk, hogy információit bizalmasan kezeljük. Szakértő kollégánk hamarosan (általában 24 órán belül) felveszi Önnel a kapcsolatot a megadott elérhetőségeken, hogy egyeztessen a részletekről. Üdvözlettel: Az ERP & MES Solutions csapata"
+
+            // UPDATED AUTORESPONSE
+            _autoresponse: 
+              "Köszönjük megkeresését!\nÜzenete és adatai sikeresen megérkeztek rendszerünkbe.\nBiztosítjuk, hogy az Ön által megadott adatokat bizalmasan kezeljük, és harmadik félnek csak az Ön előzetes jóváhagyásával adjuk át.\nSzakértő kollégánk hamarosan (általában 24 órán belül) felveszi Önnel a kapcsolatot a megadott elérhetőségek egyikén, hogy egyeztesse Önnel a részleteket.\n\nÜdvözlettel:\nA szoftvernavigator.hu csapata"
         })
       });
 
       if (response.ok) {
         setStatus('success');
-        // Adatok törlése siker esetén
         setFormData({ name: '', company: '', email: '', phone: '', interest: 'Vállalatirányítás (ERP)', message: '' });
       } else {
         setStatus('error');
@@ -212,7 +209,7 @@ const LeadForm = () => {
 
   if (status === 'success') {
     return (
-      <div className="relative z-30 max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12 text-center animate-in fade-in zoom-in duration-300">
+      <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12 text-center animate-in fade-in zoom-in duration-300">
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-10 h-10 text-green-600" />
         </div>
@@ -231,29 +228,34 @@ const LeadForm = () => {
   }
 
   return (
-    <div className="relative z-30 max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12">
+    <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-blue-900">
         Kérjen ajánlatot kötelezettségek nélkül!
       </h2>
 
-      {/* A form tag-en van az onSubmit eseménykezelő, ami megakadályozza az oldalfrissítést.
-          + HTML fallback: action + method, ha a JS valamiért nem fut (mobilon is menjen el az űrlap) */}
       <form
         onSubmit={handleSubmit}
         action="https://formsubmit.co/laszlo.turoczi@gmail.com"
         method="POST"
-        className="space-y-6"
+        className="space-y-6 relative"
       >
-        {/* Konfigurációs mezők – HTML fallback esetére (JS nélkül is működjön) */}
-        <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+
+        {/* UPDATED AUTORESPONSE (HIDDEN INPUT) */}
         <input
           type="hidden"
           name="_autoresponse"
-          value="Köszönjük megkeresését! Rendszerünk sikeresen rögzítette adatait. Biztosítjuk, hogy információit bizalmasan kezeljük. Szakértő kollégánk hamarosan (általában 24 órán belül) felveszi Önnel a kapcsolatot a megadott elérhetőségeken, hogy egyeztessen a részletekről. Üdvözlettel: Az ERP & MES Solutions csapata"
+          value={
+"Köszönjük megkeresését!\nÜzenete és adatai sikeresen megérkeztek rendszerünkbe.\nBiztosítjuk, hogy az Ön által megadott adatokat bizalmasan kezeljük, és harmadik félnek csak az Ön előzetes jóváhagyásával adjuk át.\nSzakértő kollégánk hamarosan (általában 24 órán belül) felveszi Önnel a kapcsolatot a megadott elérhetőségek egyikén, hogy egyeztesse Önnel a részleteket.\n\nÜdvözlettel:\nA szoftvernavigator.hu csapata"
+          }
         />
-        {/* A _subject dinamikusan AJAX-ban továbbra is a névvel megy, 
-            fallback esetén a Formsubmit saját default tárgyát használja. */}
+
+        <input
+          type="hidden"
+          name="_subject"
+          value="Új érdeklődő érkezett a weboldalról"
+        />
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
@@ -261,23 +263,24 @@ const LeadForm = () => {
             <input 
               required
               name="name"
-              type="text" 
+              type="text"
               value={formData.name}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors" 
-              placeholder="Az Ön neve" 
+              placeholder="Az Ön neve"
             />
           </div>
+          
           <div>
             <label className="block text-sm font-bold mb-2">Cégnév*</label>
             <input 
               required
               name="company"
-              type="text" 
+              type="text"
               value={formData.company}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors" 
-              placeholder="Vállalkozás neve" 
+              placeholder="Vállalkozás neve"
             />
           </div>
         </div>
@@ -288,13 +291,14 @@ const LeadForm = () => {
             <input 
               required
               name="email"
-              type="email" 
+              type="email"
               value={formData.email}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors" 
-              placeholder="pelda@email.hu" 
+              placeholder="pelda@email.hu"
             />
           </div>
+
           <div>
             <label className="block text-sm font-bold mb-2">Melyik megoldás érdekli?</label>
             <select 
@@ -313,23 +317,23 @@ const LeadForm = () => {
         </div>
 
         <div>
-           <label className="block text-sm font-bold mb-2">Telefonszám*</label>
-           <input 
-             required
-             name="phone"
-             type="tel" 
-             value={formData.phone}
-             onChange={handleChange}
-             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors" 
-             placeholder="+36 20 123 4567" 
-           />
+          <label className="block text-sm font-bold mb-2">Telefonszám*</label>
+          <input 
+            required
+            name="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors" 
+            placeholder="+36 20 123 4567"
+          />
         </div>
 
         <div>
           <label className="block text-sm font-bold mb-2">Rövid üzenet</label>
           <textarea 
             name="message"
-            rows="4" 
+            rows="4"
             value={formData.message}
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors" 
@@ -375,25 +379,16 @@ export default function App() {
   const [activePage, setActivePage] = useState('landing');
 
   useEffect(() => {
-    // Scroll a tetejére lapváltáskor
     window.scrollTo(0, 0);
   }, [activePage]);
 
-  // NAV + GÖRGETÉS a "kapcsolat-urlap" szekcióhoz
   const handleScrollAndPageChange = (target, page) => {
     if (target) {
-        // Natív, megbízható horgonyra ugrás (pl. #kapcsolat-urlap)
         window.location.hash = target;
     }
     if (page) {
-        // Oldalváltás a React state-ben
         setActivePage(page);
     }
-  };
-
-  // Footerhez: egyszerű, direkt navigáció állapottal (Safari-barát)
-  const navigateToPage = (page) => {
-    setActivePage(page);
   };
 
   const goHome = () => setActivePage('landing');
@@ -405,10 +400,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
-      {/* HERO SZEKCIÓ (Fejléc) */}
+      {/* HERO SZEKCIÓ */}
       <header className="relative text-white py-32 px-4 overflow-hidden">
         <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat pointer-events-none"
           style={{ backgroundImage: "url('hatter.png')" }}
         ></div>
         
@@ -429,7 +424,6 @@ export default function App() {
           </p>
           
           <div className="flex flex-col items-center gap-4">
-            {/* VISSZAHÍVÁS GOMB: Hívja a handleScrollAndPageChange funkciót */}
             <a 
               href="#kapcsolat-urlap"
               onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)}
@@ -451,7 +445,7 @@ export default function App() {
 
       {/* MIÉRT VÁLASSZON MINKET? */}
       <section className="py-16 px-4 bg-blue-50">
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center"> 
           <h2 className="text-3xl font-bold mb-12 text-slate-900">Miért válasszon minket?</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -464,6 +458,7 @@ export default function App() {
                 Versenyztetjük a partnereket, így Ön garantáltan a legjobb ajánlatot kapja.
               </p>
             </div>
+
             <div className="flex flex-col items-center">
               <div className="bg-white p-4 rounded-full mb-4 shadow-sm">
                 <CheckCircle className="w-8 h-8 text-blue-600" />
@@ -473,6 +468,7 @@ export default function App() {
                 Pontosan az Ön iparágára és méretére szabott megoldásokat szállítunk.
               </p>
             </div>
+
             <div className="flex flex-col items-center">
               <div className="bg-white p-4 rounded-full mb-4 shadow-sm">
                 <Clock className="w-8 h-8 text-blue-600" />
@@ -482,6 +478,7 @@ export default function App() {
                 Levesszük a terhet a válláról a piackutatástól a kiválasztásig.
               </p>
             </div>
+
             <div className="flex flex-col items-center">
               <div className="bg-white p-4 rounded-full mb-4 shadow-sm">
                 <Layers className="w-8 h-8 text-blue-600" />
@@ -491,6 +488,7 @@ export default function App() {
                 Nemcsak szoftvert, hanem a bevezetéshez szükséges pályázati forrást is segítünk megszerezni.
               </p>
             </div>
+
           </div>
         </div>
       </section>
@@ -501,6 +499,7 @@ export default function App() {
           <h2 className="text-3xl font-bold mb-12 text-center text-slate-900">Fókuszterületek</h2>
           
           <div className="grid md:grid-cols-4 gap-8">
+
             {/* Egyedi Szoftverek */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow flex flex-col h-full">
               <div className="bg-blue-900 text-white py-4 text-center font-bold text-lg">
@@ -516,7 +515,6 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Testreszabott Megoldások</h3>
                 <p className="text-gray-600 text-sm mb-6">Teljesen az Ön üzleti folyamataira szabott szoftverek, amikor a dobozos megoldás nem elég.</p>
                 <div className="mt-auto w-full">
-                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -539,7 +537,6 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Teljes körű integráció</h3>
                 <p className="text-gray-600 text-sm mb-6">Pénzügy, készletkezelés, beszerzés és HR folyamatok egyetlen átlátható rendszerben.</p>
                 <div className="mt-auto w-full">
-                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -562,7 +559,6 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Termelésoptimalizálás</h3>
                 <p className="text-gray-600 text-sm mb-6">Valós idejű termeléskövetés, gépkihasználtság (OEE) mérés és minőségbiztosítás.</p>
                 <div className="mt-auto w-full">
-                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -578,14 +574,13 @@ export default function App() {
               <div className="p-0">
                  <img src="palyazat.png" alt="Pályázatírás" className="w-full h-56 object-cover" />
               </div>
-              <div className="p-6 flex flex-col items-center text-center flex-grow">
+              <div className="p6 flex flex-col items-center text-center flex-grow p-6">
                  <div className="mb-3">
                    <FileSignature className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="font-bold mb-2 text-xl">Forrásteremtés</h3>
                 <p className="text-gray-600 text-sm mb-6">Szakértő segítség pályázati források felkutatásában és a teljes dokumentáció összeállításában.</p>
                 <div className="mt-auto w-full">
-                  {/* ANCHOR TAG */}
                   <a href="#kapcsolat-urlap" onClick={() => handleScrollAndPageChange('kapcsolat-urlap', null)} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
                   </a>
@@ -620,7 +615,7 @@ export default function App() {
             </div>
 
             <div className="mb-8 md:mb-0 bg-white p-4 w-full md:w-1/4">
-              <div className="w-16 h-16 mx-auto bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 border-4 border-white shadow-md">3</div>
+              <div className="w-16 h-16 mxauto bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 border-4 border-white shadow-md">3</div>
               <FileCheck className="w-8 h-8 mx-auto text-blue-600 mb-2" />
               <h4 className="font-bold text-lg">Legjobb Ajánlatok</h4>
               <p className="text-sm text-gray-500 mt-2">Bemutatjuk Önnek a megszűrt, legjobb ár-érték arányú opciókat.</p>
@@ -660,43 +655,27 @@ export default function App() {
       </section>
 
       {/* KAPCSOLATI ŰRLAP */}
-      <section id="kapcsolat-urlap" className="relative z-20 py-16 px-4 bg-blue-900 text-white">
+      <section id="kapcsolat-urlap" className="py-16 px-4 bg-blue-900 text-white">
         <LeadForm />
       </section>
 
       {/* LÁBLÉC */}
-      <footer className="relative z-50 bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
-        <div className="flex justify-center gap-6 mb-4">
-          {/* Safari-barát, több eseményt használó gombok, vizuálisan változatlanul */}
+      <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
+        <div className="flex justify-center gap-6 mb-4 relative z-[9999] pointer-events-auto">
           <button
-            type="button"
-            onClick={() => navigateToPage('contact')}
-            onTouchStart={() => navigateToPage('contact')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') navigateToPage('contact');
-            }}
+            onClick={() => handleScrollAndPageChange(null, 'contact')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Kapcsolat
           </button>
           <button 
-            type="button"
-            onClick={() => navigateToPage('privacy')}
-            onTouchStart={() => navigateToPage('privacy')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') navigateToPage('privacy');
-            }}
+            onClick={() => handleScrollAndPageChange(null, 'privacy')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Adatvédelem
           </button>
           <button 
-            type="button"
-            onClick={() => navigateToPage('terms')}
-            onTouchStart={() => navigateToPage('terms')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') navigateToPage('terms');
-            }}
+            onClick={() => handleScrollAndPageChange(null, 'terms')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             ÁSZF
@@ -704,6 +683,7 @@ export default function App() {
         </div>
         <p>&copy; 2025 ERP & MES Solutions. Minden jog fenntartva.</p>
       </footer>
+
     </div>
   );
 }
