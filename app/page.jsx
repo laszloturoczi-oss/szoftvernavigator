@@ -360,32 +360,8 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [activePage]);
 
-  // JAVÍTOTT GÖRGETÉS FUNKCIÓ
-  const scrollToForm = () => {
-    // Ha nem a landing page-en vagyunk, először navigáljunk oda
-    if (activePage !== 'landing') {
-      setActivePage('landing');
-      
-      // Hagyjuk, hogy a React befejezze a renderelést
-      setTimeout(() => {
-        const formSection = document.getElementById('kapcsolat-urlap');
-        if (formSection) {
-            formSection.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            // TARTALÉK MEGOLDÁS HORGONNYAL
-            window.location.hash = 'kapcsolat-urlap';
-        }
-      }, 100);
-    } else {
-      const formSection = document.getElementById('kapcsolat-urlap');
-      if (formSection) {
-        formSection.scrollIntoView({ behavior: 'smooth' });
-      } else {
-         // TARTALÉK MEGOLDÁS HORGONNYAL
-        window.location.hash = 'kapcsolat-urlap';
-      }
-    }
-  };
+  // A GÖRGŐ FUNKCIÓT ELTÁVOLÍTOTTUK, A GOMBOK HELYETT ANCHOR TAG-et HASZNÁLUNK
+  // így a mobil natív böngészője kezeli a horgonyra ugrást (#kapcsolat-urlap)
 
   const goHome = () => setActivePage('landing');
   
@@ -420,12 +396,13 @@ export default function App() {
           </p>
           
           <div className="flex flex-col items-center gap-4">
-            <button 
-              onClick={scrollToForm}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition duration-300 shadow-xl shadow-orange-500/20 text-lg"
+            {/* JAVÍTOTT GOMB: ANCHOR TAG A NATÍV MOBIL GÖRGETÉSÉRT */}
+            <a 
+              href="#kapcsolat-urlap"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition duration-300 shadow-xl shadow-orange-500/20 text-lg text-center"
             >
               Ingyenes Konzultáció Kérése
-            </button>
+            </a>
             
             <div 
               className="flex items-center gap-2 text-white hover:text-orange-100 transition-colors cursor-pointer mt-4"
@@ -505,9 +482,10 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Testreszabott Megoldások</h3>
                 <p className="text-gray-600 text-sm mb-6">Teljesen az Ön üzleti folyamataira szabott szoftverek, amikor a dobozos megoldás nem elég.</p>
                 <div className="mt-auto w-full">
-                  <button onClick={scrollToForm} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors">
+                  {/* JAVÍTOTT GOMB */}
+                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -527,9 +505,10 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Teljes körű integráció</h3>
                 <p className="text-gray-600 text-sm mb-6">Pénzügy, készletkezelés, beszerzés és HR folyamatok egyetlen átlátható rendszerben.</p>
                 <div className="mt-auto w-full">
-                  <button onClick={scrollToForm} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors">
+                  {/* JAVÍTOTT GOMB */}
+                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -549,9 +528,10 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Termelésoptimalizálás</h3>
                 <p className="text-gray-600 text-sm mb-6">Valós idejű termeléskövetés, gépkihasználtság (OEE) mérés és minőségbiztosítás.</p>
                 <div className="mt-auto w-full">
-                  <button onClick={scrollToForm} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors">
+                  {/* JAVÍTOTT GOMB */}
+                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -571,9 +551,10 @@ export default function App() {
                 <h3 className="font-bold mb-2 text-xl">Forrásteremtés</h3>
                 <p className="text-gray-600 text-sm mb-6">Szakértő segítség pályázati források felkutatásában és a teljes dokumentáció összeállításában.</p>
                 <div className="mt-auto w-full">
-                  <button onClick={scrollToForm} className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors">
+                  {/* JAVÍTOTT GOMB */}
+                  <a href="#kapcsolat-urlap" className="w-full py-2 border-2 border-orange-500 text-orange-500 font-bold rounded-lg hover:bg-orange-50 transition-colors inline-block">
                     Érdekel
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -652,24 +633,28 @@ export default function App() {
       {/* LÁBLÉC */}
       <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
         <div className="flex justify-center gap-6 mb-4">
-          <button 
-            onClick={() => setActivePage('contact')} 
+          {/* JAVÍTOTT MENÜPONTOK: ANCHOR TAG A STABIL MŰKÖDÉSÉRT */}
+          <a
+            href="#" 
+            onClick={(e) => { e.preventDefault(); setActivePage('contact'); }} 
             className="hover:text-white transition-colors"
           >
             Kapcsolat
-          </button>
-          <button 
-            onClick={() => setActivePage('privacy')} 
+          </a>
+          <a 
+            href="#" 
+            onClick={(e) => { e.preventDefault(); setActivePage('privacy'); }} 
             className="hover:text-white transition-colors"
           >
             Adatvédelem
-          </button>
-          <button 
-            onClick={() => setActivePage('terms')} 
+          </a>
+          <a 
+            href="#" 
+            onClick={(e) => { e.preventDefault(); setActivePage('terms'); }} 
             className="hover:text-white transition-colors"
           >
             ÁSZF
-          </button>
+          </a>
         </div>
         <p>&copy; 2025 ERP & MES Solutions. Minden jog fenntartva.</p>
       </footer>
