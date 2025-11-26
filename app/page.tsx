@@ -287,7 +287,7 @@ const LeadForm = () => {
           <label className="block text-sm font-bold mb-2">Üzenet</label>
           <textarea 
             name="message"
-            rows="4"
+            rows={4}
             value={formData.message}
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded"
