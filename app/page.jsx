@@ -412,8 +412,8 @@ export default function App() {
             className="text-4xl md:text-6xl font-bold leading-tight mb-6"
             style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
           >
-            Megtaláljuk Önnek a tökéletes Vállalatirányítási és Gyártásirányítási szoftvert – <br/>
-            <span className="text-blue-300">a legjobb piaci áron.</span>
+            Megtaláljuk Önnek a tökéletes Vállalatirányítási és Gyártásirányítási szoftvert <br/>
+            <span className="text-blue-300">A legjobb piaci áron</span>
           </h1>
           
           <p 
