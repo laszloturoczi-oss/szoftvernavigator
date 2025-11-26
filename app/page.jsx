@@ -660,22 +660,25 @@ export default function App() {
       </section>
 
       {/* LÁBLÉC */}
-      <footer className="relative z-20 bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
+      <footer className="relative z-50 bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
         <div className="flex justify-center gap-6 mb-4">
           {/* JAVÍTOTT MENÜPONTOK: BUTTON TAG-ek használata a stabil ONCLICK eseménykezelésért */}
           <button
+            type="button"
             onClick={() => handleScrollAndPageChange(null, 'contact')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Kapcsolat
           </button>
           <button 
+            type="button"
             onClick={() => handleScrollAndPageChange(null, 'privacy')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Adatvédelem
           </button>
           <button 
+            type="button"
             onClick={() => handleScrollAndPageChange(null, 'terms')} 
             className="hover:text-white transition-colors cursor-pointer"
           >
