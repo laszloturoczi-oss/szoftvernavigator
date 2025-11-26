@@ -379,7 +379,7 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [activePage]);
 
-  // JAVÍTOTT FUNKCIÓ A STABIL GÖRGETÉSHEZ ÉS NAVIGÁCIÓHOZ
+  // NAV + GÖRGETÉS a "kapcsolat-urlap" szekcióhoz
   const handleScrollAndPageChange = (target, page) => {
     if (target) {
         // Natív, megbízható horgonyra ugrás (pl. #kapcsolat-urlap)
@@ -389,6 +389,11 @@ export default function App() {
         // Oldalváltás a React state-ben
         setActivePage(page);
     }
+  };
+
+  // Footerhez: egyszerű, direkt navigáció állapottal (Safari-barát)
+  const navigateToPage = (page) => {
+    setActivePage(page);
   };
 
   const goHome = () => setActivePage('landing');
@@ -662,37 +667,40 @@ export default function App() {
       {/* LÁBLÉC */}
       <footer className="relative z-50 bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
         <div className="flex justify-center gap-6 mb-4">
-          {/* Linkek, amelyek vizuálisan ugyanúgy néznek ki, de Safari is stabilan kezeli a kattintást */}
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              handleScrollAndPageChange(null, 'contact');
+          {/* Safari-barát, több eseményt használó gombok, vizuálisan változatlanul */}
+          <button
+            type="button"
+            onClick={() => navigateToPage('contact')}
+            onTouchStart={() => navigateToPage('contact')}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') navigateToPage('contact');
             }}
             className="hover:text-white transition-colors cursor-pointer"
           >
             Kapcsolat
-          </a>
-          <a 
-            href="#privacy"
-            onClick={(e) => {
-              e.preventDefault();
-              handleScrollAndPageChange(null, 'privacy');
+          </button>
+          <button 
+            type="button"
+            onClick={() => navigateToPage('privacy')}
+            onTouchStart={() => navigateToPage('privacy')}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') navigateToPage('privacy');
             }}
             className="hover:text-white transition-colors cursor-pointer"
           >
             Adatvédelem
-          </a>
-          <a 
-            href="#terms"
-            onClick={(e) => {
-              e.preventDefault();
-              handleScrollAndPageChange(null, 'terms');
+          </button>
+          <button 
+            type="button"
+            onClick={() => navigateToPage('terms')}
+            onTouchStart={() => navigateToPage('terms')}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') navigateToPage('terms');
             }}
             className="hover:text-white transition-colors cursor-pointer"
           >
             ÁSZF
-          </a>
+          </button>
         </div>
         <p>&copy; 2025 ERP & MES Solutions. Minden jog fenntartva.</p>
       </footer>
