@@ -662,28 +662,37 @@ export default function App() {
       {/* LÁBLÉC */}
       <footer className="relative z-50 bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
         <div className="flex justify-center gap-6 mb-4">
-          {/* JAVÍTOTT MENÜPONTOK: BUTTON TAG-ek használata a stabil ONCLICK eseménykezelésért */}
-          <button
-            type="button"
-            onClick={() => handleScrollAndPageChange(null, 'contact')} 
+          {/* Linkek, amelyek vizuálisan ugyanúgy néznek ki, de Safari is stabilan kezeli a kattintást */}
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              handleScrollAndPageChange(null, 'contact');
+            }}
             className="hover:text-white transition-colors cursor-pointer"
           >
             Kapcsolat
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleScrollAndPageChange(null, 'privacy')} 
+          </a>
+          <a 
+            href="#privacy"
+            onClick={(e) => {
+              e.preventDefault();
+              handleScrollAndPageChange(null, 'privacy');
+            }}
             className="hover:text-white transition-colors cursor-pointer"
           >
             Adatvédelem
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleScrollAndPageChange(null, 'terms')} 
+          </a>
+          <a 
+            href="#terms"
+            onClick={(e) => {
+              e.preventDefault();
+              handleScrollAndPageChange(null, 'terms');
+            }}
             className="hover:text-white transition-colors cursor-pointer"
           >
             ÁSZF
-          </button>
+          </a>
         </div>
         <p>&copy; 2025 ERP & MES Solutions. Minden jog fenntartva.</p>
       </footer>
