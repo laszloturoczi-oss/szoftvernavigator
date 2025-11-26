@@ -550,7 +550,7 @@ export default function App() {
           </h1>
           
           <p 
-            className="text-xl text-white mb-10 max-w-2xl font-medium"
+            className="text-2xl text-white mb-10 max-w-2xl font-medium"
             style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.9)' }}
           >
             Kiterjedt partnerhálózatunk versenyez az Ön projektjéért, hogy garantáltan a legjobb megoldást kapja.
