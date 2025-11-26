@@ -212,7 +212,7 @@ const LeadForm = () => {
 
   if (status === 'success') {
     return (
-      <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12 text-center animate-in fade-in zoom-in duration-300">
+      <div className="relative z-30 max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12 text-center animate-in fade-in zoom-in duration-300">
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-10 h-10 text-green-600" />
         </div>
@@ -231,7 +231,7 @@ const LeadForm = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12">
+    <div className="relative z-30 max-w-3xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl p-8 md:p-12">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-blue-900">
         Kérjen ajánlatot kötelezettségek nélkül!
       </h2>
@@ -638,12 +638,12 @@ export default function App() {
       </section>
 
       {/* KAPCSOLATI ŰRLAP */}
-      <section id="kapcsolat-urlap" className="py-16 px-4 bg-blue-900 text-white">
+      <section id="kapcsolat-urlap" className="relative z-20 py-16 px-4 bg-blue-900 text-white">
         <LeadForm />
       </section>
 
       {/* LÁBLÉC */}
-      <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
+      <footer className="relative z-20 bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
         <div className="flex justify-center gap-6 mb-4">
           {/* JAVÍTOTT MENÜPONTOK: BUTTON TAG-ek használata a stabil ONCLICK eseménykezelésért */}
           <button
