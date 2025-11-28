@@ -515,7 +515,7 @@ export default function App() {
   };
 
   const goHome = () => setActivePage('landing');
-  
+   
   if (activePage === 'contact') return <ContactPage onBack={goHome} />;
   if (activePage === 'privacy') return <PrivacyPage onBack={goHome} />;
   if (activePage === 'terms') return <TermsPage onBack={goHome} />;
@@ -545,15 +545,15 @@ export default function App() {
             className="text-4xl md:text-6xl font-bold leading-tight mb-6"
             style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
           >
-            Megtaláljuk Önnek a tökéletes Vállalatirányítási és Gyártásirányítási szoftvert <br/>
-            <span className="text-blue-300">A legjobb piaci áron</span>
+            Vezess be prémium üzleti szoftvereket féláron vagy akár ingyen – <br/>
+            <span className="text-blue-300">Pályázati forrásból!</span>
           </h1>
           
           <p 
-            className="text-2xl text-white mb-10 max-w-2xl font-medium"
+            className="text-xl md:text-2xl text-white mb-10 max-w-4xl font-medium"
             style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.9)' }}
           >
-            Kiterjedt partnerhálózatunk versenyez az Ön projektjéért, hogy garantáltan a legjobb megoldást kapja.
+            A SzoftverNavigátor nemcsak segít kiválasztani a cégedhez illő legjobb vállalatirányítási, CRM vagy számlázó rendszert, de a DIMOP Plusz és egyéb aktuális pályázatokon keresztül a finanszírozást is elintézzük helyetted. 100%-os ügyintézés, 0% kockázat.
           </p>
           
           <div className="flex flex-col items-center gap-4">
@@ -646,7 +646,7 @@ export default function App() {
                     alt="Egyedi Szoftverfejlesztés illusztráció és kódolás" 
                     className="w-full h-56 object-cover" 
                     loading="lazy"
-                 />
+                  />
               </div>
               <div className="p-6 flex flex-col items-center text-center flex-grow">
                  <div className="mb-3">
@@ -700,7 +700,7 @@ export default function App() {
                     alt="Gyártásirányítási rendszer (MES) termeléskövetés monitoron" 
                     className="w-full h-56 object-cover" 
                     loading="lazy"
-                 />
+                  />
               </div>
               <div className="p-6 flex flex-col items-center text-center flex-grow">
                  <div className="mb-3">
@@ -727,7 +727,7 @@ export default function App() {
                     alt="Sikeres pályázatírás és dokumentáció készítés digitális eszközökkel" 
                     className="w-full h-56 object-cover" 
                     loading="lazy"
-                 />
+                  />
               </div>
               <div className="p-6 flex flex-col items-center text-center flex-grow p-6">
                  <div className="mb-3">
