@@ -43,7 +43,7 @@ const StructuredData = () => {
     "description": "Megtaláljuk Önnek a tökéletes Vállalatirányítási (ERP) és Gyártásirányítási (MES) szoftvert a legjobb piaci áron. Ingyenes közvetítés és tanácsadás.",
     "url": SITE_URL,
     "telephone": "+36204209501",
-    "email": "laszlo.turoczi@gmail.com",
+    "email": "szoftvernavigator@gmail.com",
     "priceRange": "Ingyenes",
     "address": {
       "@type": "PostalAddress",
