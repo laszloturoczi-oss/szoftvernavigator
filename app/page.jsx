@@ -107,7 +107,7 @@ const ContactPage = ({ onBack }) => (
           </div>
           <div>
             <h3 className="font-bold text-lg mb-1">Email</h3>
-            <p className="text-gray-600">laszlo.turoczi@gmail.com</p>
+            <p className="text-gray-600">szoftvernavigator@gmail.com</p>
           </div>
         </div>
       </div>
@@ -262,7 +262,7 @@ const LeadForm = () => {
     setStatus('loading');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/laszlo.turoczi@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/szoftvernavigator@gmail.com", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
@@ -326,7 +326,7 @@ const LeadForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        action="https://formsubmit.co/laszlo.turoczi@gmail.com"
+        action="https://formsubmit.co/szoftvernavigator@gmail.com"
         method="POST"
         className="space-y-6 relative"
         aria-label="Ajánlatkérő űrlap"
