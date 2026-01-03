@@ -545,7 +545,7 @@ export default function App() {
             className="text-4xl md:text-6xl font-bold leading-tight mb-6"
             style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
           >
-            Vezess be prémium üzleti szoftvereket féláron vagy akár ingyen – <br/>
+            Digitalizáld vállalkozásod állami támogatással– <br/>
             <span className="text-blue-300">Pályázati forrásból!</span>
           </h1>
           
@@ -553,7 +553,7 @@ export default function App() {
             className="text-xl md:text-2xl text-white mb-10 max-w-4xl font-medium"
             style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.9)' }}
           >
-            A SzoftverNavigátor nemcsak segít kiválasztani a cégedhez illő legjobb vállalatirányítási, CRM vagy számlázó rendszert, de a DIMOP Plusz és egyéb aktuális pályázatokon keresztül a finanszírozást is elintézzük helyetted. 100%-os ügyintézés, 0% kockázat.
+            Miért fizetnél teljes árat, ha pályázati forrásból is fejleszthetsz? Mi megtaláljuk a cégedre szabott tökéletes szoftvert, és elintézzük hozzá a finanszírozást.
           </p>
           
           <div className="flex flex-col items-center gap-4">
